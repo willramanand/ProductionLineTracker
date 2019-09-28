@@ -1,14 +1,15 @@
 package willramanand;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,145 +19,134 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-import java.sql.PreparedStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 /**
- * This is the Controller of the Production Line Tracker Application. It stores all major code
- * functionality within the program.
+ * <p>This is the Controller of the Production Line Tracker Application. It stores all major code
+ * functionality within the program.</p>
+ *
+ * @author William Ramanand
  */
 public class Controller implements Initializable {
 
   /**
-   * This constant variable stores the H2 Driver needed to initialize a connection to the database
+   * This constant variable stores the H2 Driver needed to initialize a connection to the database.
    */
-  final static String JDBC_DRIVER = "org.h2.Driver";
+  private static final String JDBC_DRIVER = "org.h2.Driver";
 
   /**
    * This constant variable stores the location of of the database for connection initialization.
    */
-  final static String DB_URL = "jdbc:h2:./res/ProductionDB";
+  private static final String DB_URL = "jdbc:h2:./res/ProductionDB";
 
   /**
    * This constant stores a String that holds the Username needed to access the database.
    */
-  final static String USER = "";
+  private static final String USER = "";
 
   /**
    * This constant stores a String that holds the Password needed to access the database.
    */
-  final static String PASS = "";
+  private static final String PASS = "";
 
   /**
-   * Initializes the
-   */
-  private Connection conn = null;
-
-  /**
-   *
-   */
-  private Statement stmt = null;
-
-  /**
-   *
+   * Represents the record production button using its fx:id from fxml.
    */
   @FXML
-  private Button recProdBtn, addProductBtn;
+  private Button recProdBtn;
 
   /**
-   *
+   * Represents the add product button using its fx:id from fxml.
    */
   @FXML
-  private TextField prodNameField, manufacturerField;
+  private Button addProductBtn;
 
   /**
-   *
+   * Represents the product name text field using its fx:id from fxml.
+   */
+  @FXML
+  private TextField prodNameField;
+
+  /**
+   * Represents the manufacturer text field using its fx:id from fxml.
+   */
+  @FXML
+  private TextField manufacturerField;
+
+  /**
+   * Represents the choice box in the program using its fx:id from fxml.
    */
   @FXML
   private ChoiceBox itemTypeChoice;
 
+  /**
+   * The combo box in the program that takes an array list using its fx:id from fxml.
+   */
   @FXML
-  private ComboBox<String> produceComboBox;
+  private ComboBox<String> produceCombo;
 
+  /**
+   * This method initializes the combo box in the produce tab.
+   *
+   * @param url       points to a needed resource
+   * @param resources is the locale-specific resources available to the program.
+   */
   @FXML
   public void initialize(URL url, ResourceBundle resources) {
-    produceComboBox.setEditable(true);
-    produceComboBox.getSelectionModel().selectFirst();
-    produceComboBox.setItems(FXCollections.observableArrayList(getList()));
+    // Set values 1-10
+    produceCombo.setItems(
+        FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+        ));
+
+    // Set as editable
+    produceCombo.setEditable(true);
+
+    // Select default value of combo box
+    produceCombo.getSelectionModel().selectFirst();
   }
 
   /**
-   * @param actionEvent
+   * When the Add Product button is pressed it adds a new entry into the database.
    */
   @FXML
-  public void addProductBtnPressed(ActionEvent actionEvent) {
+  public void addProductBtnPressed() {
     try {
-      // STEP 1: Register JDBC driver
+      // Initializes the connection variable to a null value.
+      Connection conn;
+
+      // Register JDBC driver
       Class.forName(JDBC_DRIVER);
 
-      //STEP 2: Open a connection
+      // Open a connection
       conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-      //STEP 3: Execute a query
-      stmt = conn.createStatement();
-
+      // Create query
       String sql = "INSERT INTO PRODUCT(TYPE, MANUFACTURER, NAME ) VALUES ('TestType', ?, ? )";
 
+      // Set as prepared statement to put dynamic values
       PreparedStatement preparedStatement =
           conn.prepareStatement(sql);
 
+      // Insert dynamic values
       preparedStatement.setString(1, manufacturerField.getText());
       preparedStatement.setString(2, prodNameField.getText());
 
+      // Execute query
       preparedStatement.executeUpdate();
 
-      // STEP 4: Clean-up environment
-      stmt.close();
+      // Clean-up environment
       conn.close();
       preparedStatement.close();
-    } catch (ClassNotFoundException e) {
+    } catch (SQLException | ClassNotFoundException e) {
       e.printStackTrace();
 
-    } catch (SQLException e) {
-      e.printStackTrace();
     }
   }
 
   /**
-   * @param actionEvent
+   * When the record production is pressed it outputs Hi! to console.
    */
   @FXML
-  public void recProdBtnPressed(ActionEvent actionEvent) {
+  public void recProdBtnPressed() {
     System.out.println("Hi!");
   }
 
-  private List<String> getList() {
-
-    List<String> results = new ArrayList<>();
-    try {
-      // STEP 1: Register JDBC driver
-      Class.forName(JDBC_DRIVER);
-
-      //STEP 2: Open a connection
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-      //STEP 3: Execute a query
-      stmt = conn.createStatement();
-
-      String sql = "SELECT * FROM PRODUCT";
-
-      ResultSet resultSet = stmt.executeQuery(sql);
-
-      while (resultSet.next()) {
-        results.add(resultSet.getString(1));
-      }
-
-    } catch (SQLException | ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
 }

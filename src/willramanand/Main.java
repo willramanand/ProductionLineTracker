@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *  This is the main class of the Production Line Tracker.
- *  It starts the application and sets the screen dimensions.
+ * <p>This is the main class of the Production Line Tracker. It starts the application and sets the
+ * screen dimensions.</p>
+ *
+ * @author Will Ramanand
  */
 public class Main extends Application {
 
