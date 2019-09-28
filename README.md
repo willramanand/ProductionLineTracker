@@ -1,5 +1,5 @@
 # ProductionLineTracker
-This project allows the user to add products and the quantities to a database. It also allows recording of 
+This project allows the user to add products and the quantities to a database. It also allows recording of production that was completed. Order request can be taken and the program can keep track of orders.
 ## Demonstration
 ![Demonstration](https://github.com/willramanand/ProductionLineTracker/blob/master/img/InitialDemonstration.gif)
 ## Documentation
