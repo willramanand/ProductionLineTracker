@@ -9,9 +9,12 @@ This project allows the user to add products and the quantities to a database. I
 
 ![Java Class Diagram](https://github.com/willramanand/ProductionLineTracker/blob/master/img/JavaClassDiagram.png)
 ## Getting Started
-To fork and run this project you need to:
-- Start a JavaFX project using the JDK 8 (preferably in IntelliJ)
-- Download the H2 Database ([https://www.h2database.com/html/main.html](https://www.h2database.com/html/main.html))
+To run this project you need to (Preferably in IntelliJ):
+- Click File -> New -> Project from Version Control - > Git
+- In the URL field copy: https://github.com/willramanand/ProductionLineTracker.git
+- Download and Install the H2 Database ([https://www.h2database.com/html/main.html](https://www.h2database.com/html/main.html))
+- In IntelliJ, click Project Structure -> Modules -> Dependencies -> + -> Jars or directories
+	- Find the h2-1.x.xxx.jar and open it then click apply.
 ## Built With
 - Java
 - CSS
