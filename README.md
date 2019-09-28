@@ -34,4 +34,4 @@ If you want to contribute to this project you can fork the project make your cha
 	- Basic interface of program
 	- Generate Javadocs
 ## Key Programming Concepts Utilized
-This program utilizes objected-oriented programming mostly through Java. It also takes utilization of GUI practices through the use of JavaFX. CSS and HTML were used to design interface.
+This program utilizes objected-oriented programming mostly through Java. It also takes utilization of GUI practices through the use of JavaFX. CSS and HTML were used to design the interface.
