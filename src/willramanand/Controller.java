@@ -9,8 +9,6 @@ import java.sql.SQLException;
 
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -99,6 +97,9 @@ public class Controller implements Initializable {
 
     // Select default value of combo box
     produceCombo.getSelectionModel().selectFirst();
+
+    // Add types to choice box
+    itemTypeChoice.getItems().addAll(ItemType.values());
   }
 
   /**
@@ -117,15 +118,18 @@ public class Controller implements Initializable {
       conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
       // Create query
-      String sql = "INSERT INTO PRODUCT(TYPE, MANUFACTURER, NAME ) VALUES ('TestType', ?, ? )";
+      String sql = "INSERT INTO PRODUCT(TYPE, MANUFACTURER, NAME ) VALUES (?, ?, ? )";
 
       // Set as prepared statement to put dynamic values
       PreparedStatement preparedStatement =
           conn.prepareStatement(sql);
 
+      ItemType it = (ItemType) itemTypeChoice.getValue();
+
       // Insert dynamic values
-      preparedStatement.setString(1, manufacturerField.getText());
-      preparedStatement.setString(2, prodNameField.getText());
+      preparedStatement.setString(1, it.getCode(it) );
+      preparedStatement.setString(2, manufacturerField.getText());
+      preparedStatement.setString(3, prodNameField.getText());
 
       // Execute query
       preparedStatement.executeUpdate();
