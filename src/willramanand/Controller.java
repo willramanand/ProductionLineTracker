@@ -92,9 +92,7 @@ public class Controller implements Initializable {
   @FXML
   public void initialize(URL url, ResourceBundle resources) {
     // Set values 1-10
-    produceCombo.setItems(
-        FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-        ));
+    produceCombo.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
     // Set as editable
     produceCombo.setEditable(true);
