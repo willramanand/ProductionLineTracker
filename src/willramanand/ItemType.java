@@ -1,7 +1,5 @@
 package willramanand;
 
-import javafx.scene.control.ChoiceBox;
-
 public enum ItemType {
   Audio ("AU"),
   Visual ("VI"),
