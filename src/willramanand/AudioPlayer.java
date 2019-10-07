@@ -23,12 +23,9 @@ public class AudioPlayer extends Product implements MultimediaControl {
     System.out.println("Next");
   }
 
-  @Override
-  public String toString() {
-    return "Name: " + getName()
-        + "\nManufacturer: " + getManufacturer()
-        + "\nType: AUDIO"
-        + "\nSupported Audio Formats: " + supportedAudioFormats
-        + "\nSupported Playlist Formats: " + supportedPlaylistFormats;
+  public void printInfo() {
+    super.printInfo();
+    System.out.println("\nSupported Audio Formats: " + supportedAudioFormats
+        + "\nSupported Playlist Formats: " + supportedPlaylistFormats);
   }
 }

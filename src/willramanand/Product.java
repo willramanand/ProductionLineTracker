@@ -29,10 +29,10 @@ public abstract class Product implements Item {
   public String getManufacturer() {
     return manufacturer;
   }
-  public String toString() {
-    return "Name: " + name
+  protected void printInfo() {
+    System.out.println("Name: " + name
         + "\nManufacturer: " + manufacturer
-        + "\nType: " + type;
+        + "\nType: " + type);
   }
 
 }
