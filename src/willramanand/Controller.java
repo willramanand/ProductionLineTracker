@@ -127,7 +127,7 @@ public class Controller implements Initializable {
       ItemType it = (ItemType) itemTypeChoice.getValue();
 
       // Insert dynamic values
-      preparedStatement.setString(1, it.getCode(it) );
+      preparedStatement.setString(1, it.getCode() );
       preparedStatement.setString(2, manufacturerField.getText());
       preparedStatement.setString(3, prodNameField.getText());
 
