@@ -1,3 +1,6 @@
+.background {
+    -fx-background-color: white;
+}
 .button {
     -fx-background-color: aqua;
     -fx-text-fill: white;
