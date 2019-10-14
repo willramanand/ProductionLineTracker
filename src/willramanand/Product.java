@@ -1,5 +1,7 @@
 package willramanand;
 
+import willramanand.interfaces.Item;
+
 public abstract class Product implements Item {
   private int id;
   private String type;

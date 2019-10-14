@@ -1,5 +1,7 @@
 package willramanand;
 
+import willramanand.interfaces.MultimediaControl;
+
 public class AudioPlayer extends Product implements MultimediaControl {
   private String supportedAudioFormats;
   private String supportedPlaylistFormats;
@@ -31,7 +33,7 @@ public class AudioPlayer extends Product implements MultimediaControl {
   }
 
   public String toString() {
-    return super.toString() +"Supported Audio Formats: "
+    return super.toString() +"\nSupported Audio Formats: "
             + supportedAudioFormats
             + "\nSupported Playlist Formats: "
             + supportedPlaylistFormats;

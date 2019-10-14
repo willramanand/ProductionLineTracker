@@ -1,4 +1,4 @@
-package willramanand;
+package willramanand.enums;
 
 public enum ItemType {
   Audio ("AU"),

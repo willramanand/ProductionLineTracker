@@ -1,4 +1,4 @@
-package willramanand;
+package willramanand.interfaces;
 
 public interface MultimediaControl {
 
