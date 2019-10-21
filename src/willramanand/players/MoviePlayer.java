@@ -1,17 +1,17 @@
 package willramanand.players;
 
-import willramanand.utils.Product;
-import willramanand.utils.Screen;
 import willramanand.enums.ItemType;
 import willramanand.enums.MonitorType;
 import willramanand.interfaces.MultimediaControl;
+import willramanand.utils.Product;
+import willramanand.utils.Screen;
 
 public class MoviePlayer extends Product implements MultimediaControl {
   private Screen screen;
   private MonitorType monitorType;
 
   public MoviePlayer(String name, String manufacturer, Screen screen, MonitorType monitorType) {
-    super(name, manufacturer, ItemType.Visual);
+    super(name, manufacturer, ItemType.VISUAL);
     this.screen = screen;
     this.monitorType = monitorType;
   }
@@ -34,7 +34,6 @@ public class MoviePlayer extends Product implements MultimediaControl {
 
   @Override
   public String toString() {
-    return super.toString() + this.screen
-        + "\nMonitor Type: " + this.monitorType;
+    return super.toString() + this.screen + "\nMonitor Type: " + this.monitorType;
   }
 }

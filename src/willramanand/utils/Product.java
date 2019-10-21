@@ -15,13 +15,14 @@ public abstract class Product implements Item {
     this.type = type;
   }
 
-  public int getId(){
+  public int getId() {
     return id;
   }
 
-  public void setName(String name){
+  public void setName(String name) {
     this.name = name;
   }
+
   public String getName() {
     return name;
   }
@@ -29,6 +30,7 @@ public abstract class Product implements Item {
   public void setType(ItemType type) {
     this.type = type;
   }
+
   public ItemType getType() {
     return type;
   }
@@ -36,9 +38,11 @@ public abstract class Product implements Item {
   public void setManufacturer(String manufacturer) {
     this.manufacturer = manufacturer;
   }
+
   public String getManufacturer() {
     return manufacturer;
   }
+
   public String toString() {
     return "Name: " + name
         + "\nManufacturer: " + manufacturer

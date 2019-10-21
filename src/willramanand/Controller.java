@@ -19,14 +19,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import willramanand.enums.ItemType;
-import willramanand.players.AudioPlayer;
+
 import willramanand.utils.Product;
 import willramanand.utils.ProductionRecord;
 import willramanand.utils.Widget;
 
 /**
- * <p>This is the Controller of the Production Line Tracker Application. It stores all major code
- * functionality within the program.</p>
+ * This is the Controller of the Production Line Tracker Application. It stores all major code
+ * functionality within the program.
  *
  * @author William Ramanand
  */
@@ -42,62 +42,37 @@ public class Controller implements Initializable {
    */
   private static final String DB_URL = "jdbc:h2:./res/ProductionDB";
 
-  /**
-   * This constant stores a String that holds the Username needed to access the database.
-   */
+  /** This constant stores a String that holds the Username needed to access the database. */
   private static final String USER = "";
 
-  /**
-   * This constant stores a String that holds the Password needed to access the database.
-   */
+  /** This constant stores a String that holds the Password needed to access the database. */
   private static final String PASS = "";
 
-  /**
-   * Represents the record production button using its fx:id from fxml.
-   */
-  @FXML
-  private Button recProdBtn;
+  /** Represents the record production button using its fx:id from fxml. */
+  @FXML private Button recProdBtn;
 
-  /**
-   * Represents the add product button using its fx:id from fxml.
-   */
-  @FXML
-  private Button addProductBtn;
+  /** Represents the add product button using its fx:id from fxml. */
+  @FXML private Button addProductBtn;
 
-  /**
-   * Represents the product name text field using its fx:id from fxml.
-   */
-  @FXML
-  private TextField prodNameField;
+  /** Represents the product name text field using its fx:id from fxml. */
+  @FXML private TextField prodNameField;
 
-  /**
-   * Represents the manufacturer text field using its fx:id from fxml.
-   */
-  @FXML
-  private TextField manufacturerField;
+  /** Represents the manufacturer text field using its fx:id from fxml. */
+  @FXML private TextField manufacturerField;
 
-  /**
-   * Represents the choice box in the program using its fx:id from fxml.
-   */
-  @FXML
-  private ChoiceBox itemTypeChoice;
+  /** Represents the choice box in the program using its fx:id from fxml. */
+  @FXML private ChoiceBox itemTypeChoice;
 
-  /**
-   * The combo box in the program that takes an array list using its fx:id from fxml.
-   */
-  @FXML
-  private ComboBox<String> produceCombo;
+  /** The combo box in the program that takes an array list using its fx:id from fxml. */
+  @FXML private ComboBox<String> produceCombo;
 
-  /**
-   * The text area in the production log tab that displays production records.
-   */
-  @FXML
-  private TextArea productionLogArea;
+  /** The text area in the production log tab that displays production records. */
+  @FXML private TextArea productionLogArea;
 
   /**
    * This method initializes the combo box in the produce tab.
    *
-   * @param url       points to a needed resource
+   * @param url points to a needed resource
    * @param resources is the locale-specific resources available to the program.
    */
   @FXML
@@ -114,16 +89,14 @@ public class Controller implements Initializable {
     // Add types to choice box
     itemTypeChoice.getItems().addAll(ItemType.values());
 
-    Product product = new Widget("IPhone", "Apple", ItemType.Audio);
+    Product product = new Widget("IPhone", "Apple", ItemType.AUDIO);
 
     ProductionRecord prTest = new ProductionRecord(product, 1);
 
     productionLogArea.setText(prTest.toString());
   }
 
-  /**
-   * When the Add Product button is pressed it adds a new entry into the database.
-   */
+  /** When the Add Product button is pressed it adds a new entry into the database. */
   @FXML
   public void addProductBtnPressed() {
     try {
@@ -140,13 +113,12 @@ public class Controller implements Initializable {
       String sql = "INSERT INTO PRODUCT(TYPE, MANUFACTURER, NAME ) VALUES (?, ?, ? )";
 
       // Set as prepared statement to put dynamic values
-      PreparedStatement preparedStatement =
-          conn.prepareStatement(sql);
+      PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
       ItemType it = (ItemType) itemTypeChoice.getValue();
 
       // Insert dynamic values
-      preparedStatement.setString(1, it.getCode() );
+      preparedStatement.setString(1, it.getCode());
       preparedStatement.setString(2, manufacturerField.getText());
       preparedStatement.setString(3, prodNameField.getText());
 
@@ -158,16 +130,12 @@ public class Controller implements Initializable {
       preparedStatement.close();
     } catch (SQLException | ClassNotFoundException e) {
       e.printStackTrace();
-
     }
   }
 
-  /**
-   * When the record production is pressed it outputs Hi! to console.
-   */
+  /** When the record production is pressed it outputs Hi! to console. */
   @FXML
   public void recProdBtnPressed() {
     System.out.println("Hi!");
   }
-
 }

@@ -1,19 +1,18 @@
 package willramanand.enums;
 
 public enum ItemType {
-  Audio ("AU"),
-  Visual ("VI"),
-  AudioMobile ("AM"),
-  VisualMobile ("VM");
+  AUDIO("AU"),
+  VISUAL("VI"),
+  AUDIOMOBILE("AM"),
+  VISUALMOBILE("VM");
 
   private final String code;
 
-  ItemType (String code) {
+  ItemType(String code) {
     this.code = code;
   }
 
   public String getCode() {
     return code;
   }
-
 }

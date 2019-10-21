@@ -19,16 +19,18 @@ public class Screen implements ScreenSpec {
   public String getResolution() {
     return resolution;
   }
+
   public int getRefreshRate() {
     return refreshRate;
   }
+
   public int getResponseTime() {
     return responseTime;
   }
 
   public String toString() {
     return "\nScreen:"
-        +"\nResolution: " + this.resolution
+        + "\nResolution: " + this.resolution
         + "\nRefresh rate: " + this.refreshRate
         + "\nResponse time: " + this.responseTime;
   }
