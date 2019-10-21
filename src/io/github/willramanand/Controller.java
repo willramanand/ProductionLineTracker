@@ -1,4 +1,4 @@
-package willramanand;
+package io.github.willramanand;
 
 import java.net.URL;
 
@@ -18,11 +18,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import willramanand.enums.ItemType;
+import io.github.willramanand.enums.ItemType;
 
-import willramanand.utils.Product;
-import willramanand.utils.ProductionRecord;
-import willramanand.utils.Widget;
+import io.github.willramanand.utils.Product;
+import io.github.willramanand.utils.ProductionRecord;
+import io.github.willramanand.utils.Widget;
 
 /**
  * This is the Controller of the Production Line Tracker Application. It stores all major code

@@ -1,4 +1,4 @@
-package willramanand.interfaces;
+package io.github.willramanand.interfaces;
 
 public interface ScreenSpec {
   String getResolution();

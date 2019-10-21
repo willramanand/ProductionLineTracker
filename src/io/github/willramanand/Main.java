@@ -1,4 +1,4 @@
-package willramanand;
+package io.github.willramanand;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

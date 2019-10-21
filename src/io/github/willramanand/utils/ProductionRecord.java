@@ -1,4 +1,4 @@
-package willramanand.utils;
+package io.github.willramanand.utils;
 
 import java.util.Date;
 

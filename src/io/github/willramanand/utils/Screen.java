@@ -1,6 +1,6 @@
-package willramanand.utils;
+package io.github.willramanand.utils;
 
-import willramanand.interfaces.ScreenSpec;
+import io.github.willramanand.interfaces.ScreenSpec;
 
 public class Screen implements ScreenSpec {
 

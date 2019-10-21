@@ -1,8 +1,8 @@
-package willramanand.players;
+package io.github.willramanand.players;
 
-import willramanand.enums.ItemType;
-import willramanand.interfaces.MultimediaControl;
-import willramanand.utils.Product;
+import io.github.willramanand.enums.ItemType;
+import io.github.willramanand.interfaces.MultimediaControl;
+import io.github.willramanand.utils.Product;
 
 public class AudioPlayer extends Product implements MultimediaControl {
   private String supportedAudioFormats;
