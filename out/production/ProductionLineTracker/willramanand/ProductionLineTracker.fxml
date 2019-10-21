@@ -76,7 +76,7 @@
   </Tab>
   <Tab text="Production Log">
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-      <TextArea layoutX="49.0" layoutY="51.0" prefHeight="403.0" prefWidth="579.0"/>
+      <TextArea fx:id="productionLogArea" layoutX="49.0" layoutY="51.0" prefHeight="403.0" prefWidth="579.0"/>
     </AnchorPane>
   </Tab>
 </TabPane>

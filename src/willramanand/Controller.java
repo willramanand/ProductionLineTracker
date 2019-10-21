@@ -15,7 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import willramanand.enums.ItemType;
 
 /**
@@ -83,6 +85,12 @@ public class Controller implements Initializable {
   private ComboBox<String> produceCombo;
 
   /**
+   * The text area in the production log tab that displays production records.
+   */
+  @FXML
+  private TextArea productionLogArea;
+
+  /**
    * This method initializes the combo box in the produce tab.
    *
    * @param url       points to a needed resource
@@ -101,6 +109,10 @@ public class Controller implements Initializable {
 
     // Add types to choice box
     itemTypeChoice.getItems().addAll(ItemType.values());
+
+    ProductionRecord prTest = new ProductionRecord(0);
+
+    productionLogArea.setText(prTest.toString());
   }
 
   /**
