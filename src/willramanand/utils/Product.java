@@ -26,6 +26,13 @@ public abstract class Product implements Item {
     return name;
   }
 
+  public void setType(ItemType type) {
+    this.type = type;
+  }
+  public ItemType getType() {
+    return type;
+  }
+
   public void setManufacturer(String manufacturer) {
     this.manufacturer = manufacturer;
   }
@@ -37,5 +44,5 @@ public abstract class Product implements Item {
         + "\nManufacturer: " + manufacturer
         + "\nType: " + type;
   }
-
 }
+

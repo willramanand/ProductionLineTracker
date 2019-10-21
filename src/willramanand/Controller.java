@@ -19,7 +19,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import willramanand.enums.ItemType;
+import willramanand.players.AudioPlayer;
+import willramanand.utils.Product;
 import willramanand.utils.ProductionRecord;
+import willramanand.utils.Widget;
 
 /**
  * <p>This is the Controller of the Production Line Tracker Application. It stores all major code
@@ -111,7 +114,9 @@ public class Controller implements Initializable {
     // Add types to choice box
     itemTypeChoice.getItems().addAll(ItemType.values());
 
-    ProductionRecord prTest = new ProductionRecord(0);
+    Product product = new Widget("IPhone", "Apple", ItemType.Audio);
+
+    ProductionRecord prTest = new ProductionRecord(product, 1);
 
     productionLogArea.setText(prTest.toString());
   }
