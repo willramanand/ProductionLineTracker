@@ -1,5 +1,8 @@
-package willramanand;
+package willramanand.players;
 
+import willramanand.utils.Product;
+import willramanand.utils.Screen;
+import willramanand.enums.ItemType;
 import willramanand.enums.MonitorType;
 import willramanand.interfaces.MultimediaControl;
 
@@ -8,7 +11,7 @@ public class MoviePlayer extends Product implements MultimediaControl {
   private MonitorType monitorType;
 
   public MoviePlayer(String name, String manufacturer, Screen screen, MonitorType monitorType) {
-    super(name, manufacturer, "VISUAL");
+    super(name, manufacturer, ItemType.Visual);
     this.screen = screen;
     this.monitorType = monitorType;
   }

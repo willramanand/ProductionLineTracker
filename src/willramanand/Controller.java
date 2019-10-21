@@ -19,6 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import willramanand.enums.ItemType;
+import willramanand.utils.ProductionRecord;
 
 /**
  * <p>This is the Controller of the Production Line Tracker Application. It stores all major code

@@ -1,4 +1,4 @@
-package willramanand;
+package willramanand.utils;
 
 import willramanand.interfaces.ScreenSpec;
 

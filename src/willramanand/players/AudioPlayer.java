@@ -1,5 +1,7 @@
-package willramanand;
+package willramanand.players;
 
+import willramanand.utils.Product;
+import willramanand.enums.ItemType;
 import willramanand.interfaces.MultimediaControl;
 
 public class AudioPlayer extends Product implements MultimediaControl {
@@ -11,7 +13,7 @@ public class AudioPlayer extends Product implements MultimediaControl {
       String manufacturer,
       String supportedAudioFormats,
       String supportedPlaylistFormats) {
-    super(name, manufacturer, "AUDIO");
+    super(name, manufacturer, ItemType.Audio);
     this.supportedAudioFormats = supportedAudioFormats;
     this.supportedPlaylistFormats = supportedPlaylistFormats;
   }

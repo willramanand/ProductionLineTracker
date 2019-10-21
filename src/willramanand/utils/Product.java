@@ -1,14 +1,15 @@
-package willramanand;
+package willramanand.utils;
 
+import willramanand.enums.ItemType;
 import willramanand.interfaces.Item;
 
 public abstract class Product implements Item {
   private int id;
-  private String type;
+  private ItemType type;
   private String manufacturer;
   private String name;
 
-  public Product(String name, String manufacturer, String type) {
+  public Product(String name, String manufacturer, ItemType type) {
     this.name = name;
     this.manufacturer = manufacturer;
     this.type = type;
