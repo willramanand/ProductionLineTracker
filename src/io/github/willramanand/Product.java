@@ -1,9 +1,7 @@
-package io.github.willramanand.utils;
-
-import io.github.willramanand.enums.ItemType;
-import io.github.willramanand.interfaces.Item;
+package io.github.willramanand;
 
 public abstract class Product implements Item {
+
   private int id;
   private ItemType type;
   private String manufacturer;

@@ -1,5 +1,8 @@
-package io.github.willramanand.interfaces;
+package io.github.willramanand;
 
+/**
+ * The interface for media control.
+ */
 public interface MultimediaControl {
 
   void play();

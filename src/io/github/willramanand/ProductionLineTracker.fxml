@@ -55,18 +55,13 @@
       <Button id="button" fx:id="addProductBtn" layoutX="531.0" layoutY="272.0"
         mnemonicParsing="false"
         onAction="#addProductBtnPressed" text="Add Product"/>
-      <TableView layoutX="22.0" layoutY="318.0" prefHeight="176.0" prefWidth="633.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1"/>
-          <TableColumn prefWidth="75.0" text="C2"/>
-        </columns>
-      </TableView>
+      <TableView  fx:id="productsTable" layoutX="22.0" layoutY="318.0" prefHeight="176.0" prefWidth="633.0"/>
     </AnchorPane>
   </Tab>
   <Tab text="Produce">
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
       <Label layoutX="125.0" layoutY="152.0" text="Choose Product:"/>
-      <ListView layoutX="273.0" layoutY="32.0" prefHeight="262.0" prefWidth="278.0"/>
+      <ListView fx:id="produceList" layoutX="273.0" layoutY="32.0" prefHeight="262.0" prefWidth="278.0"/>
       <ComboBox fx:id="produceCombo" layoutX="276.0" layoutY="345.0" prefHeight="25.0"
         prefWidth="275.0"/>
       <Label layoutX="123.0" layoutY="349.0" text="Choose Quantity:"/>

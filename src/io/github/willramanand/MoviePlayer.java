@@ -1,12 +1,8 @@
-package io.github.willramanand.players;
+package io.github.willramanand;
 
-import io.github.willramanand.enums.ItemType;
-import io.github.willramanand.enums.MonitorType;
-import io.github.willramanand.utils.Screen;
-import io.github.willramanand.interfaces.MultimediaControl;
-import io.github.willramanand.utils.Product;
 
 public class MoviePlayer extends Product implements MultimediaControl {
+
   private Screen screen;
   private MonitorType monitorType;
 

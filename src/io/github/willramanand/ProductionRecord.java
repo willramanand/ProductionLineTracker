@@ -1,8 +1,9 @@
-package io.github.willramanand.utils;
+package io.github.willramanand;
 
 import java.util.Date;
 
 public class ProductionRecord {
+
   private int productionNumber;
   private int productID;
   private String serialNumber;

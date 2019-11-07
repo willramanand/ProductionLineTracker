@@ -1,6 +1,7 @@
-package io.github.willramanand.interfaces;
+package io.github.willramanand;
 
 public interface ScreenSpec {
+
   String getResolution();
 
   int getRefreshRate();
