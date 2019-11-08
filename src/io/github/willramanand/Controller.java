@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -59,12 +60,12 @@ public class Controller implements Initializable {
   /**
    * Creates the connection for the database.
    */
-  Connection conn = null;
+  private Connection conn = null;
 
   /**
    * Creates the variable for the statement for the database.
    */
-  Statement stmt = null;
+  private Statement stmt = null;
 
   /**
    * Represents the record production button using its fx:id from fxml.
@@ -144,6 +145,24 @@ public class Controller implements Initializable {
 
     // Add types to choice box
     itemTypeChoice.getItems().addAll(ItemType.values());
+
+    // Test audio and movie player
+    AudioPlayer newAudioProduct = new AudioPlayer("DP-X1A", "Onkyo",
+        "DSD/FLAC/ALAC/WAV/AIFF/MQA/Ogg-Vorbis/MP3/AAC", "M3U/PLS/WPL");
+    Screen newScreen = new Screen("720x480", 40, 22);
+    MoviePlayer newMovieProduct = new MoviePlayer("DBPOWER MK101", "OracleProduction", newScreen,
+        MonitorType.LCD);
+    ArrayList<MultimediaControl> productList = new ArrayList<MultimediaControl>();
+    productList.add(newAudioProduct);
+    productList.add(newMovieProduct);
+    for (MultimediaControl p : productList) {
+      System.out.println(p);
+      p.play();
+      p.stop();
+      p.next();
+      p.previous();
+      System.out.println();
+    }
 
     setupProductTable();
     populateProductTable();
@@ -282,17 +301,19 @@ public class Controller implements Initializable {
    */
   @FXML
   public void recProdBtnPressed() {
-    Product productToBeAdded = (Product) produceList.getSelectionModel().getSelectedItem();
+    Product productToBeAdded = produceList.getSelectionModel().getSelectedItem();
     String selectionName = productToBeAdded.getName();
     String selectionManufacturer = productToBeAdded.getManufacturer();
     ItemType selectionType = productToBeAdded.getType();
 
     Product selectedProduct = new Widget(selectionName, selectionManufacturer, selectionType);
 
-    ProductionRecord pr = new ProductionRecord(selectedProduct,
-        Integer.parseInt(produceCombo.getSelectionModel().getSelectedItem()));
-
-    productionLogArea.appendText(pr.toString() + "\n");
+    // Generate number of products
+    for (int i = 1; i <= Integer.parseInt(produceCombo.getSelectionModel().getSelectedItem());
+        i++) {
+      ProductionRecord pr = new ProductionRecord(selectedProduct, i);
+      productionLogArea.appendText(pr.toString() + "\n");
+    }
   }
 
   /**
@@ -305,10 +326,6 @@ public class Controller implements Initializable {
     ItemType retType = ItemType.AUDIO;
 
     switch (inputString) {
-      case "AU":
-      case "AUDIO":
-        retType = ItemType.AUDIO;
-        break;
       case "VI":
       case "VISUAL":
         retType = ItemType.VISUAL;
@@ -322,7 +339,6 @@ public class Controller implements Initializable {
         retType = ItemType.VISUALMOBILE;
         break;
       default:
-        retType = ItemType.AUDIO;
         break;
     }
     return retType;
