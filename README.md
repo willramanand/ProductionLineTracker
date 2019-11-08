@@ -33,5 +33,10 @@ If you want to contribute to this project you can fork the project make your cha
 	- Implemented database
 	- Basic interface of program
 	- Generate Javadocs
+	
+- Sprint 2 completed (11/8/19)
+	- Production Log, Produce completed
+	- Integrated database
+	- Added product, movieplayer, audioplayers, and widgets
 ## Key Programming Concepts Utilized
 This program utilizes objected-oriented programming mostly through Java. It also takes utilization of GUI practices through the use of JavaFX. CSS and HTML were used to design the interface.
