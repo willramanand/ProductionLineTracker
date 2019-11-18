@@ -327,16 +327,15 @@ public class Controller implements Initializable {
     try {
 
       // Create query
-      String sql = "INSERT INTO PRODUCTIONRECORD(PRODUCTION_NUM, PRODUCT_ID, SERIAL_NUM, DATE_PRODUCED) VALUES (?, ?, ?, ?)";
+      String sql = "INSERT INTO PRODUCTIONRECORD(PRODUCT_ID, SERIAL_NUM, DATE_PRODUCED) VALUES (?, ?, ?)";
 
       // Set as prepared statement to put dynamic values
       PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
       // Insert dynamic values
-      preparedStatement.setInt(1, productionRecord.getProductionNum());
-      preparedStatement.setInt(2, productionRecord.getProductID());
-      preparedStatement.setString(3, productionRecord.getSerialNum());
-      preparedStatement.setDate(4, new java.sql.Date(productionRecord.getProdDate().getTime()));
+      preparedStatement.setInt(1, productionRecord.getProductID());
+      preparedStatement.setString(2, productionRecord.getSerialNum());
+      preparedStatement.setDate(3, new java.sql.Date(productionRecord.getProdDate().getTime()));
 
       // Execute query
       preparedStatement.executeUpdate();
@@ -372,8 +371,9 @@ public class Controller implements Initializable {
         dateProducedSQL = resultSet.getDate("DATE_PRODUCED");
 
         dateProduced = new Date(dateProducedSQL.getTime());
-
-        productionRecords.add(new ProductionRecord(productNum, productID, productSerialNum, dateProduced));
+        ProductionRecord pr = new ProductionRecord(productNum, productID, productSerialNum, dateProduced);
+        pr.setProductionNum(productNum);
+        productionRecords.add(pr);
       }
       resultSet.close();
     } catch (SQLException e) {

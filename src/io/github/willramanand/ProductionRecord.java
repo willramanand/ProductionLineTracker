@@ -21,6 +21,8 @@ public class ProductionRecord {
   /** Stores date product was produced. */
   private Date dateProduced;
 
+
+
   /**
    * Constructor of production record.
    *
@@ -57,7 +59,7 @@ public class ProductionRecord {
    */
   public ProductionRecord(Product productProduced, int count) {
     this.productionNumber = 0;
-    this.productID = 0;
+    this.productID = productProduced.getId();
     if (productProduced.getManufacturer().length() >= 3) {
       this.serialNumber =
           productProduced.getManufacturer().substring(0, 3)
