@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -126,13 +127,14 @@ public class Controller implements Initializable {
    */
   private ObservableList<Product> products;
 
+  private ObservableList<ProductionRecord> productionRecords;
+
   /**
    * This method initializes the combo box in the produce tab.
    *
    * @param url       points to a needed resource
    * @param resources is the locale-specific resources available to the program.
    */
-  @FXML
   public void initialize(URL url, ResourceBundle resources) {
     // Set values 1-10
     produceCombo.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
@@ -166,8 +168,11 @@ public class Controller implements Initializable {
 
     setupProductTable();
     populateProductTable();
-
     setupProduceListView();
+
+    productionRecords = FXCollections.observableArrayList();
+    setupProductionLog();
+    populateProductionLog();
   }
 
   /**
@@ -312,10 +317,80 @@ public class Controller implements Initializable {
     for (int i = 1; i <= Integer.parseInt(produceCombo.getSelectionModel().getSelectedItem());
         i++) {
       ProductionRecord pr = new ProductionRecord(selectedProduct, i);
-      productionLogArea.appendText(pr.toString() + "\n");
+      addToProductionDB(pr);
+      productionLogArea.appendText("\n" + pr.toString());
     }
   }
 
+  public void addToProductionDB(ProductionRecord productionRecord) {
+    initializeDB();
+    try {
+
+      // Create query
+      String sql = "INSERT INTO PRODUCTIONRECORD(PRODUCTION_NUM, PRODUCT_ID, SERIAL_NUM, DATE_PRODUCED) VALUES (?, ?, ?, ?)";
+
+      // Set as prepared statement to put dynamic values
+      PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+      // Insert dynamic values
+      preparedStatement.setInt(1, productionRecord.getProductionNum());
+      preparedStatement.setInt(2, productionRecord.getProductID());
+      preparedStatement.setString(3, productionRecord.getSerialNum());
+      preparedStatement.setDate(4, new java.sql.Date(productionRecord.getProdDate().getTime()));
+
+      // Execute query
+      preparedStatement.executeUpdate();
+
+      // Clean-up environment
+      preparedStatement.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    closeDB();
+  }
+
+  public void setupProductionLog() {
+    initializeDB();
+
+    productionRecords.clear();
+    try {
+      ResultSet resultSet;
+      String query = "SELECT * FROM PRODUCTIONRECORD";
+      resultSet = stmt.executeQuery(query);
+
+      int productNum;
+      int productID;
+      String productSerialNum;
+      java.sql.Date dateProducedSQL;
+      Date dateProduced;
+
+      while (resultSet.next()) {
+
+        productNum = resultSet.getInt("PRODUCTION_NUM");
+        productID = resultSet.getInt("PRODUCT_ID");
+        productSerialNum = resultSet.getString("SERIAL_NUM");
+        dateProducedSQL = resultSet.getDate("DATE_PRODUCED");
+
+        dateProduced = new Date(dateProducedSQL.getTime());
+
+        productionRecords.add(new ProductionRecord(productNum, productID, productSerialNum, dateProduced));
+      }
+      resultSet.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    closeDB();
+  }
+
+  public void populateProductionLog() {
+    for (int i = 0; productionRecords.size() >  i; i++) {
+      if (i < productionRecords.size()) {
+        productionLogArea.appendText(productionRecords.get(i).toString() + "\n");
+      } else {
+        productionLogArea.appendText(productionRecords.get(i).toString());
+      }
+    }
+  }
   /**
    * Converts a String ItemType to the ItemType type.
    *
