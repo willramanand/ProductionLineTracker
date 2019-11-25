@@ -157,6 +157,9 @@ public class Controller implements Initializable {
     productionRecords = FXCollections.observableArrayList();
     setupProductionLog();
     populateProductionLog();
+
+    System.out.println("Apple");
+    System.out.println(reverseString("Apple"));
   }
 
   /**
@@ -415,5 +418,13 @@ public class Controller implements Initializable {
         break;
     }
     return retType;
+  }
+
+  public static String reverseString(String id)
+  {
+    if (id.isEmpty())
+      return id;
+
+    return reverseString(id.substring(1)) + id.charAt(0);
   }
 }
