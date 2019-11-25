@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Employee {
 
-  private final String emailExtension = "@oracleacademy.Test";
+  private static final String emailExtension = "@oracleacademy.Test";
 
   private String name;
   private String email;

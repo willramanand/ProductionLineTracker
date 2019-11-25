@@ -1,5 +1,8 @@
 package io.github.willramanand;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 
 import java.sql.Connection;
@@ -11,6 +14,7 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -36,26 +40,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author William Ramanand
  */
 public class Controller implements Initializable {
-
-  /**
-   * This constant variable stores the H2 Driver needed to initialize a connection to the database.
-   */
-  private static final String JDBC_DRIVER = "org.h2.Driver";
-
-  /**
-   * This constant variable stores the location of of the database for connection initialization.
-   */
-  private static final String DB_URL = "jdbc:h2:./res/ProductionDB";
-
-  /**
-   * This constant stores a String that holds the Username needed to access the database.
-   */
-  private static final String USER = "";
-
-  /**
-   * This constant stores a String that holds the Password needed to access the database.
-   */
-  private static final String PASS = "";
 
 
   /**
@@ -180,10 +164,24 @@ public class Controller implements Initializable {
    */
   public void initializeDB() {
     // Connection to the database
+
+    final String JDBC_DRIVER = "org.h2.Driver";
+    final String DB_URL = "jdbc:h2:./res/ProductionDB";
+    final String USER = "";
+    String pass = "";
+    try {
+      Properties prop = new Properties();
+      prop.load(new FileInputStream("res/properties"));
+      pass = prop.getProperty("password");
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     try {
       Class.forName(JDBC_DRIVER);
       // uses an empty password for now but it will be addressed at a later time
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      conn = DriverManager.getConnection(DB_URL, USER, pass);
 
       stmt = conn.createStatement();
     } catch (ClassNotFoundException e) {
