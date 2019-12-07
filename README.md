@@ -38,5 +38,9 @@ If you want to contribute to this project you can fork the project make your cha
 	- Production Log, Produce completed
 	- Integrated database
 	- Added product, movieplayer, audioplayers, and widgets
+- Sprint 3 completed (12/7/19)
+	- Production Log now had full database integration.
+	- Added employees
+	- Added reverse string function
 ## Key Programming Concepts Utilized
 This program utilizes objected-oriented programming mostly through Java. It also takes utilization of GUI practices through the use of JavaFX. CSS and HTML were used to design the interface.
