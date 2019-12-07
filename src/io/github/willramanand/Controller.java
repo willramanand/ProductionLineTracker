@@ -177,9 +177,9 @@ public class Controller implements Initializable {
       prop.load(new FileInputStream("res/properties"));
       pass = prop.getProperty("password");
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      System.out.println("Unable to find properties file!");
     } catch (IOException e) {
-      e.printStackTrace();
+      System.out.println("Unable to load properties file!");
     }
     try {
       Class.forName(jdbcDriver);
@@ -192,7 +192,7 @@ public class Controller implements Initializable {
       System.out.println("Unable to find class");
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.println("Error in SQL please try again");
+      System.out.println("Could not load database");
     }
   }
 
@@ -309,22 +309,24 @@ public class Controller implements Initializable {
    */
   @FXML
   public void recProdBtnPressed() {
-    Product productToBeAdded = produceList.getSelectionModel().getSelectedItem();
-    String selectionName = productToBeAdded.getName();
-    String selectionManufacturer = productToBeAdded.getManufacturer();
-    ItemType selectionType = productToBeAdded.getType();
-
-    Product selectedProduct = new Widget(selectionName, selectionManufacturer, selectionType);
-
-    // Generate number of products
-    for (int i = 1; i <= Integer.parseInt(produceCombo.getSelectionModel().getSelectedItem());
-        i++) {
-      ProductionRecord pr = new ProductionRecord(selectedProduct, i);
-      addToProductionDB(pr);
+    try {
+      Product productToBeAdded = produceList.getSelectionModel().getSelectedItem();
+      String selectionName = productToBeAdded.getName();
+      String selectionManufacturer = productToBeAdded.getManufacturer();
+      ItemType selectionType = productToBeAdded.getType();
+      Product selectedProduct = new Widget(selectionName, selectionManufacturer, selectionType);
+      // Generate number of products
+      for (int i = 1; i <= Integer.parseInt(produceCombo.getSelectionModel().getSelectedItem());
+          i++) {
+        ProductionRecord pr = new ProductionRecord(selectedProduct, i);
+        addToProductionDB(pr);
+      }
+      productionLogArea.clear();
+      setupProductionLog();
+      populateProductionLog();
+    } catch (Exception e) {
+      System.out.println("Please select a valid product and amount!");
     }
-    productionLogArea.clear();
-    setupProductionLog();
-    populateProductionLog();
   }
 
   /**
