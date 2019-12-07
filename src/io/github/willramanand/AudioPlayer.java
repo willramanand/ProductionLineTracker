@@ -18,7 +18,7 @@ public class AudioPlayer extends Product implements MultimediaControl {
   private String supportedPlaylistFormats;
 
   /**
-   * Constructor for Audio Player
+   * Constructor for Audio Player.
    *
    * @param name                     to set the player's name to.
    * @param manufacturer             to set the manufacturer to.
@@ -36,14 +36,14 @@ public class AudioPlayer extends Product implements MultimediaControl {
   }
 
   /**
-   * Simulates playing audio
+   * Simulates playing audio.
    */
   public void play() {
     System.out.println("Playing");
   }
 
   /**
-   * Simulates stopping audio
+   * Simulates stopping audio.
    */
   public void stop() {
     System.out.println("Stopping");
@@ -57,14 +57,14 @@ public class AudioPlayer extends Product implements MultimediaControl {
   }
 
   /**
-   * Simulates going to the next audio
+   * Simulates going to the next audio.
    */
   public void next() {
     System.out.println("Next");
   }
 
   /**
-   * Method that returns information about the AudioPlayer as a String
+   * Method that returns information about the AudioPlayer as a String.
    *
    * @return String of AudioPlayer Information
    */

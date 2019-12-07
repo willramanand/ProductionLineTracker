@@ -35,7 +35,7 @@ public class Screen implements ScreenSpec {
   }
 
   /**
-   * Gets resolution of Screen
+   * Gets resolution of Screen.
    * @return resolution
    */
   public String getResolution() {

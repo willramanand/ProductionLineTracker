@@ -1,7 +1,7 @@
 package io.github.willramanand;
 
 /**
- * The interface for Items
+ * The interface for Items.
  *
  * @author William Ramanand
  */

@@ -3,7 +3,7 @@ package io.github.willramanand;
 import java.util.Date;
 
 /**
- * Class for recording Production
+ * Class for recording Production.
  *
  * @author William Ramanand
  */
@@ -14,6 +14,9 @@ public class ProductionRecord {
 
   /** Stores product ID. */
   private int productID;
+
+  /** Stores product Name. */
+  private String productName;
 
   /** Stores serial number of product on production. */
   private String serialNumber;
@@ -43,7 +46,9 @@ public class ProductionRecord {
    * @param dateProduced the date produced.
    */
   public ProductionRecord(
-      int productionNumber, int productID, String serialNumber, Date dateProduced) {
+      int productionNumber, int productID, String serialNumber, Date dateProduced,
+      String productName) {
+    this.productName = productName;
     this.productionNumber = productionNumber;
     this.productID = productID;
     this.serialNumber = serialNumber;
@@ -51,13 +56,14 @@ public class ProductionRecord {
   }
 
   /**
-   * Constructor
+   * Constructor for production record.
    *
    * @param productProduced Product that was produced.
    * @param count number of product produced.
    */
   public ProductionRecord(Product productProduced, int count) {
     this.productID = productProduced.getId();
+    this.productName = productProduced.getName();
     if (productProduced.getManufacturer().length() >= 3) {
       this.serialNumber =
           productProduced.getManufacturer().substring(0, 3)
@@ -147,6 +153,22 @@ public class ProductionRecord {
   }
 
   /**
+   * Gets the name of the product produced.
+   * @return productName
+   */
+  public String getProductName() {
+    return productName;
+  }
+
+  /**
+   * Sets the name of the product produced.
+   * @param productName Name of product.
+   */
+  public void setProductName(String productName) {
+    this.productName = productName;
+  }
+
+  /**
    * Method for return the details of the production as a String.
    *
    * @return String of product details.
@@ -155,8 +177,8 @@ public class ProductionRecord {
   public String toString() {
     return "Prod. Num: "
         + this.productionNumber
-        + " Product ID: "
-        + this.productID
+        + " Product Name: "
+        + this.productName
         + " Serial Num: "
         + this.serialNumber
         + " Date: "

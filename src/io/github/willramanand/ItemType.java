@@ -17,7 +17,7 @@ public enum ItemType {
   private final String code;
 
   /**
-   * Sets the type's codes
+   * Sets the type's codes.
    *
    * @param code what the type's code is set to.
    */

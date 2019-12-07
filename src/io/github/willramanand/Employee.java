@@ -3,18 +3,45 @@ package io.github.willramanand;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The class to create Employees.
+ *
+ * @author William Ramanand
+ */
+
 public class Employee {
 
+  /**
+   * Constant.
+   */
   private static final String emailExtension = "@oracleacademy.Test";
 
+  /**
+   * Name of employee.
+   */
   private String name;
+  /**
+   * Email of employee.
+   */
   private String email;
+  /**
+   * Username of employee.
+   */
   private String username;
+  /**
+   * Password of employee.
+   */
   private String password;
 
+  /**
+   * Constructor for employee.
+   *
+   * @param name     to set to.
+   * @param password to set to.
+   */
   public Employee(String name, String password) {
     this.name = name;
-    if(checkName(name)) {
+    if (checkName(name)) {
       setUsername(name);
       setEmail(name);
     } else {
@@ -30,6 +57,12 @@ public class Employee {
 
   }
 
+  /**
+   * Checks if name is has space.
+   *
+   * @param name to check.
+   * @return boolean if name does have space.
+   */
   private boolean checkName(String name) {
 
     if (!name.matches("\\S+")) {
@@ -39,6 +72,12 @@ public class Employee {
     }
   }
 
+  /**
+   * Checks if entered password is valid.
+   *
+   * @param password to check.
+   * @return If password is valid or not.
+   */
   private boolean validPassword(String password) {
 
     Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
@@ -59,6 +98,11 @@ public class Employee {
     }
   }
 
+  /**
+   * Set the username using first initial then last name.
+   *
+   * @param name to set username value.
+   */
   public void setUsername(String name) {
     String[] splitNames = name.split("\\s+");
     char firstInitial = splitNames[0].toLowerCase().charAt(0);
@@ -77,6 +121,6 @@ public class Employee {
         + "\nName : " + name
         + "\nUsername : " + username
         + "\nEmail : " + email
-        + "\nInitial Password : " +  password;
+        + "\nInitial Password : " + password;
   }
 }

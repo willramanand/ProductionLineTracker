@@ -168,9 +168,9 @@ public class Controller implements Initializable {
   public void initializeDB() {
     // Connection to the database
 
-    final String JDBC_DRIVER = "org.h2.Driver";
-    final String DB_URL = "jdbc:h2:./res/ProductionDB";
-    final String USER = "";
+    final String jdbcDriver = "org.h2.Driver";
+    final String dbUrl = "jdbc:h2:./res/ProductionDB";
+    final String user = "";
     String pass = "";
     try {
       Properties prop = new Properties();
@@ -182,9 +182,9 @@ public class Controller implements Initializable {
       e.printStackTrace();
     }
     try {
-      Class.forName(JDBC_DRIVER);
+      Class.forName(jdbcDriver);
       // uses an empty password for now but it will be addressed at a later time
-      conn = DriverManager.getConnection(DB_URL, USER, pass);
+      conn = DriverManager.getConnection(dbUrl, user, pass);
 
       stmt = conn.createStatement();
     } catch (ClassNotFoundException e) {
@@ -290,6 +290,8 @@ public class Controller implements Initializable {
       populateProductTable();
     } catch (SQLException e) {
       e.printStackTrace();
+    } catch (NullPointerException e) {
+      System.out.println("Please enter values for all fields!");
     }
     closeDB();
   }
@@ -303,7 +305,7 @@ public class Controller implements Initializable {
 
 
   /**
-   * When the record production is pressed it outputs Hi! to console.
+   * Records the production into the database and production log.
    */
   @FXML
   public void recProdBtnPressed() {
@@ -319,16 +321,24 @@ public class Controller implements Initializable {
         i++) {
       ProductionRecord pr = new ProductionRecord(selectedProduct, i);
       addToProductionDB(pr);
-      productionLogArea.appendText("\n" + pr.toString());
     }
+    productionLogArea.clear();
+    setupProductionLog();
+    populateProductionLog();
   }
 
+  /**
+   * Adds an entry to the production record database.
+   *
+   * @param productionRecord entry to be added.
+   */
   public void addToProductionDB(ProductionRecord productionRecord) {
     initializeDB();
     try {
 
       // Create query
-      String sql = "INSERT INTO PRODUCTIONRECORD(PRODUCT_ID, SERIAL_NUM, DATE_PRODUCED) VALUES (?, ?, ?)";
+      String sql = "INSERT INTO PRODUCTIONRECORD(PRODUCT_ID, SERIAL_NUM, DATE_PRODUCED, NAME) "
+          + "VALUES (?, ?, ?, ?)";
 
       // Set as prepared statement to put dynamic values
       PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -337,6 +347,7 @@ public class Controller implements Initializable {
       preparedStatement.setInt(1, productionRecord.getProductID());
       preparedStatement.setString(2, productionRecord.getSerialNum());
       preparedStatement.setDate(3, new java.sql.Date(productionRecord.getProdDate().getTime()));
+      preparedStatement.setString(4, productionRecord.getProductName());
 
       // Execute query
       preparedStatement.executeUpdate();
@@ -349,6 +360,9 @@ public class Controller implements Initializable {
     closeDB();
   }
 
+  /**
+   * Setups the production log display information.
+   */
   public void setupProductionLog() {
     initializeDB();
 
@@ -361,18 +375,21 @@ public class Controller implements Initializable {
       int productNum;
       int productID;
       String productSerialNum;
-      java.sql.Date dateProducedSQL;
+      java.sql.Date dateProducedSql;
       Date dateProduced;
+      String productName;
 
       while (resultSet.next()) {
 
         productNum = resultSet.getInt("PRODUCTION_NUM");
         productID = resultSet.getInt("PRODUCT_ID");
         productSerialNum = resultSet.getString("SERIAL_NUM");
-        dateProducedSQL = resultSet.getDate("DATE_PRODUCED");
+        dateProducedSql = resultSet.getDate("DATE_PRODUCED");
+        productName = resultSet.getString("NAME");
 
-        dateProduced = new Date(dateProducedSQL.getTime());
-        ProductionRecord pr = new ProductionRecord(productNum, productID, productSerialNum, dateProduced);
+        dateProduced = new Date(dateProducedSql.getTime());
+        ProductionRecord pr = new ProductionRecord(productNum, productID, productSerialNum,
+            dateProduced, productName);
         pr.setProductionNum(productNum);
         productionRecords.add(pr);
       }
@@ -383,15 +400,19 @@ public class Controller implements Initializable {
     closeDB();
   }
 
+  /**
+   * Populates the production log with all records.
+   */
   public void populateProductionLog() {
-    for (int i = 0; productionRecords.size() >  i; i++) {
-      if (i < productionRecords.size()) {
+    for (int i = 0; productionRecords.size() > i; i++) {
+      if (i <= productionRecords.size()) {
         productionLogArea.appendText(productionRecords.get(i).toString() + "\n");
       } else {
         productionLogArea.appendText(productionRecords.get(i).toString());
       }
     }
   }
+
   /**
    * Converts a String ItemType to the ItemType type.
    *
@@ -420,10 +441,15 @@ public class Controller implements Initializable {
     return retType;
   }
 
-  public static String reverseString(String id)
-  {
-    if (id.isEmpty())
+  /**
+   * Reverses any string using recursion.
+   * @param id string to reverse.
+   * @return reversed string.
+   */
+  public static String reverseString(String id) {
+    if (id.isEmpty()) {
       return id;
+    }
 
     return reverseString(id.substring(1)) + id.charAt(0);
   }
